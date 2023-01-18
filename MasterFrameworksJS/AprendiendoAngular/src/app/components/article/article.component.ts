@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Global } from 'src/app/services/global';
 import { ArticleService } from 'src/app/services/article.service';
 import { Article } from 'src/app/models/article';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-article',
@@ -38,5 +39,34 @@ export class ArticleComponent {
       });
     });
 
+  }
+
+  delete(id: any) {
+
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'El artículo se eliminará permanentemente',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Delete',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._articleService.delete(id).subscribe({
+          next: response => {
+            Swal.fire('Artículo borrado', 'El artículo ha sido borrado', 'success');
+            this._router.navigate(['/blog']);
+          },
+          error: error => {
+            console.log(error);
+            //this._router.navigate(['/home'])
+            this._router.navigate(['/blog']);
+          }
+        });
+      } else {
+        Swal.fire('Operación cancelada', 'El artículo no ha sido borrado');
+      }
+    });    
   }
 }

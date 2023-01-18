@@ -31,22 +31,27 @@ export class ArticleService {
         return this._http.get(this.url + 'article/' + articleId);
     }
 
-    search(searchString: string): Observable<any>{
+    search(searchString: string): Observable<any> {
         return this._http.get(this.url + 'search/' + searchString);
     }
 
-    create(article: any): Observable<any>{
+    create(article: any): Observable<any> {
         let params = JSON.stringify(article);
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-        return this._http.post(this.url + 'save', params, {headers: headers});
+        return this._http.post(this.url + 'save', params, { headers: headers });
     }
 
-    update(id, article):Observable<any>{
+    update(id: any, article: any): Observable<any> {
         let params = JSON.stringify(article);
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-        return this._http.put(this.url+'article/'+id, params,{headers: headers});
+        return this._http.put(this.url + 'article/' + id, params, { headers: headers });
+    }
+
+    delete(id: any): Observable<any> {
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this._http.delete(this.url + 'article/' + id, { headers: headers });
     }
 }
 

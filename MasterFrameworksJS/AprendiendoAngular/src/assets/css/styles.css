@@ -281,11 +281,15 @@ textarea{
     transition: 300ms all;
 }
 
-.afu-attach-pin{
+.btn.up_btn.afu-attach-pin{
     display: block;
     width: 100% !important;
     max-width: 90% !important;
     margin-top: 15px;
+}
+
+.image-thumb img{
+    width: 50px;
 }
 
 input[type="text"]:focus,
