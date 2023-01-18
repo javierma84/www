@@ -1,0 +1,42 @@
+<div class="center">
+    <section id="content">
+
+        <h1 class="subheader">Crear artículo</h1>
+
+        <form class="mid-form" #articleForm="ngForm" (ngSubmit)="onSubmit()">
+            
+            <div class="form-group">
+                <label for="title">Título</label>
+                <!-- Directiva bidireccional [()] -->
+                <input type="text" name="title" #title="ngModel" [(ngModel)]="article.title" required/>
+                <small *ngIf="!title.valid && title.touched">
+                    El título no es válido
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="content">Contenido</label>
+                <textarea name="bcontentio" #content="ngModel" [(ngModel)]="article.content" required></textarea>
+                <small *ngIf="!content.valid && content.touched">
+                    El contenido no es válido
+                </small>
+            </div>
+
+            <div class="form-group">
+                <!-- Directiva bidireccional [()] -->
+                <angular-file-uploader
+                    [config]="afuConfig"
+                    (ApiResponse)="imageUpload($event)"
+                ></angular-file-uploader>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <input type="submit" value="Guardar" class="btn btn-success" [disabled]="articleForm.invalid" />
+
+        </form>
+
+    </section>
+
+    <app-sidebar></app-sidebar>
+</div>
